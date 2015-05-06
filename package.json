@@ -1,0 +1,39 @@
+{
+  "name": "node-fastbill-automatic",
+  "version": "0.0.1",
+  "description": "A nodeJS client wrapper for the node-fastbill-automatic API",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp",
+    "test": "gulp test",
+    "postinstall": "gulp hook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mgreschke/node-fastbill-automatic.git"
+  },
+  "keywords": [
+    "fastbill",
+    "fastbill-automatic",
+    "automatic",
+    "api",
+    "client",
+    "abstraction"
+  ],
+  "author": "Maximilian Greschke <maximilian.greschke@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mgreschke/node-fastbill-automatic/issues"
+  },
+  "homepage": "https://github.com/mgreschke/node-fastbill-automatic",
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-jasmine": "^0.3.0",
+    "gulp-jshint": "^1.8.3",
+    "gulp-sym": "0.0.13",
+    "jshint-stylish": "^0.4.0"
+  },
+  "dependencies": {
+    "mandatory": "^1.0.0"
+  }
+}
