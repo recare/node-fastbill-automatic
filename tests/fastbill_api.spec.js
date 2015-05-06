@@ -13,8 +13,6 @@
 
 'use strict';
 
-/* global: ,describe,it,expect */
-
 var FastBill = require('../');
 
 describe('The API Wrapper Object', function () {

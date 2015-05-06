@@ -13,8 +13,6 @@
 
 'use strict';
 
-/* global: ,describe,it,expect,beforeEach,afterEach */
-
 var FastBill = require('../');
 
 describe('The FastbillAPIs Invoice Interface', function () {
