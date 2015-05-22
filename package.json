@@ -27,6 +27,8 @@
   },
   "homepage": "https://github.com/mgreschke/node-fastbill-automatic",
   "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.2",
     "gulp": "^3.8.7",
     "gulp-jasmine": "^0.3.0",
     "gulp-jshint": "^1.8.3",
