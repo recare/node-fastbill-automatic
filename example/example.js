@@ -13,12 +13,16 @@
  *
  */
 
-// use node in --harmony mode to run this example
 'use strict';
 
 var
     config = require('./config'),
-    fastbill = require('../index');
+    fastbill = require('../index').instantiate(
+        {
+            email: config.fastbillEmail,
+            apikey: config.fastbillApiKey
+        }
+    );
 
 // 1. create a customer
 
@@ -33,6 +37,7 @@ fastbill.customer.create(
 
         // 2. create an invoice
        //TODO: continue example
+
     });
 
 
