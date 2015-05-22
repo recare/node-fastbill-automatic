@@ -1,13 +1,38 @@
 # node-fastbill-automatic
 A complete nodejs client for the fastbill automatic API
 
-npm i node-fastbill-automatic
+# quick start
+
+    npm install node-fastbill-automatic
+
+# first example
+
+    'use strict';
+    var
+      config = require('./config'),
+      fastbill = require('../index').instantiate(
+        {
+            email: config.fastbillEmail,
+            apikey: config.fastbillApiKey
+        }
+    );
+    // 1. create a customer
+    fastbill.customer.create(
+      {
+        CUSTOMER_NUMBER: '1',
+        CUSTOMER_TYPE: 'consumer',
+        FIRST_NAME: 'Max',
+        LAST_NAME: 'Michael'
+    }, function(err, data){
+    if (err) throw new Error('Customer creation failed');
+      // More stuff
+    });
+
 
 to-do:
-- examples
+- more examples
 - more meaningful unit tests
 
+
 inspired by:
-https://github.com/stripe/stripe-node
-https://github.com/airbnb/polyglot.js
 https://www.npmjs.com/package/fastbill
