@@ -1,11 +1,10 @@
 {
   "name": "node-fastbill-automatic",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A nodeJS client wrapper for the node-fastbill-automatic API",
   "readme": "README.md",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git@github.com:mgreschke/node-fastbill-automatic.git"
