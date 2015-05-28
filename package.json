@@ -5,9 +5,6 @@
   "readme": "README.md",
   "main": "index.js",
   "scripts": {
-    "build": "gulp",
-    "test": "gulp test",
-    "postinstall": "gulp hook"
   },
   "repository": {
     "type": "git",
