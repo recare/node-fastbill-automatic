@@ -19,7 +19,7 @@ describe('The API Wrapper Object', function () {
     
     var credentials = {email: '', apikey: ''};
     
-    it('should be instantiate as expected', function () {
+    it('should be instantiated as expected', function () {
         var fastbill = FastBill.instantiate(credentials);
         
         expect(fastbill).toBeDefined();
