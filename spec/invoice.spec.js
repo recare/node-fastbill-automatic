@@ -225,7 +225,7 @@ describe('The FastbillAPIs Invoice Interface', function () {
             var promise = fastbill.invoice.cancel(id);
 
             promise.then(function (result) {
-                expect(result).to.equal(true);
+                expect(result).to.equal(id);
                 done();
             }, function (err) {
                 done(

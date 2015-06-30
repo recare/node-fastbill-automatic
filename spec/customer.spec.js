@@ -35,8 +35,7 @@ describe('The FastbillAPIs Customer Interface', function () {
 
         it('should respond with a list of customers', function (done) {
             // set up mock response
-            var scope = nock(fastbill.customer.$uri)
-                .persist()
+            nock(fastbill.customer.$uri)
                 .post('')
                 .reply(200, {
                     RESPONSE: {
@@ -45,8 +44,6 @@ describe('The FastbillAPIs Customer Interface', function () {
                     }
 
                 });
-
-            console.log(scope.pendingMocks());
 
             var options = {};
             var promise = fastbill.customer.get(options);

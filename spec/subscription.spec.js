@@ -38,9 +38,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
 
             // set up mock response
             nock(fastbill.subscription.$uri)
-                .post('', function (body) {
-                    return body.service == 'subscription.get';
-                })
+                .post('')
                 .reply(200, {
                     RESPONSE: {
                         SUBSCRIPTIONS: ['object', 'object', 'object'],
@@ -347,7 +345,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
             var id = 1;
             var promise = fastbill.subscription.cancel(id);
             promise.then(function (cancellationDate) {
-                assert.typeOf(cancellationDate, 'float', 'Responds with an subscription number.')
+                assert.typeOf(cancellationDate, 'float', 'Responds with a cancellation date.');
                 done();
             }, function (err) {
                 done(
@@ -420,7 +418,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
             expect(fastbill.subscription.constructor.prototype.hasOwnProperty('setaddon')).to.equal(true);
         });
 
-        it('should not respond with an error', function () {
+        it('should not respond with an error', function (done) {
 
             // set up mock response
             nock(fastbill.subscription.$uri)
