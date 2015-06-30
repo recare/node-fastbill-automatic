@@ -14,7 +14,8 @@
 'use strict';
 
 
-var FastBill = require('../'),
+const
+    FastBill = require('../'),
     nock = require('nock'),
     expect = require('chai').expect,
     assert = require('chai').assert;
@@ -32,40 +33,10 @@ describe('The FastbillAPIs Customer Interface', function () {
             expect(fastbill.customer.constructor.prototype.hasOwnProperty('get')).to.equal(true);
         });
 
-        it('should throw errors on invalid arguments', function () {
-
-            try {
-                fastbill.customer.get();
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-                fastbill.customer.get(0, function () {
-                });
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-                fastbill.customer.get({});
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-                fastbill.customer.get([], function () {
-                });
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-        });
-
-        it('should respond with a list of customers', function () {
-
-
+        it('should respond with a list of customers', function (done) {
             // set up mock response
-            nock(fastbill.customer.$uri)
+            var scope = nock(fastbill.customer.$uri)
+                .persist()
                 .post('')
                 .reply(200, {
                     RESPONSE: {
@@ -75,10 +46,12 @@ describe('The FastbillAPIs Customer Interface', function () {
 
                 });
 
+            console.log(scope.pendingMocks());
+
             var options = {};
             var promise = fastbill.customer.get(options);
 
-            promise.then(function (data) {
+            promise.then(function (customers) {
                 assert.isArray(customers, 'Returns a list of customer objects.');
                 done();
             }, function (err) {
@@ -95,56 +68,9 @@ describe('The FastbillAPIs Customer Interface', function () {
             expect(fastbill.customer.constructor.prototype.hasOwnProperty('create')).to.equal(true);
         });
 
-        it('should throw errors on invalid arguments', function () {
 
-            try {
-                fastbill.customer.create();
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
 
-            try {
-                fastbill.customer.create(0, function () {
-                });
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-
-                // set up mock response
-                nock(fastbill.customer.$uri)
-                    .post('')
-                    .reply(200, {
-                        RESPONSE: {
-                            CUSTOMER_ID: 1
-                        }
-
-                    });
-                fastbill.customer.create({});
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-
-                // set up mock response
-                nock(fastbill.customer.$uri)
-                    .post('')
-                    .reply(200, {
-                        RESPONSE: {
-                            CUSTOMER_ID: 1
-                        }
-
-                    });
-                fastbill.customer.create([], function () {
-                });
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-        });
-
-        it('should respond with a fastbill customer id', function () {
+        it('should respond with a fastbill customer id', function (done) {
 
             // set up mock response
             nock(fastbill.customer.$uri)
@@ -178,36 +104,8 @@ describe('The FastbillAPIs Customer Interface', function () {
             expect(fastbill.customer.constructor.prototype.hasOwnProperty('update')).to.equal(true);
         });
 
-        it('should throw errors on invalid arguments', function () {
 
-            try {
-                fastbill.customer.update();
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-                fastbill.customer.update(0, function () {
-                });
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-                fastbill.customer.update({});
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-                fastbill.customer.update([], function () {
-                });
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-        });
-
-        it('should not respond with an error', function () {
+        it('should not respond with an error', function (done) {
 
             // set up mock response
             nock(fastbill.customer.$uri)
@@ -239,36 +137,8 @@ describe('The FastbillAPIs Customer Interface', function () {
             expect(fastbill.customer.constructor.prototype.hasOwnProperty('delete')).to.equal(true);
         });
 
-        it('should throw errors on invalid arguments', function () {
 
-            try {
-                fastbill.customer.delete();
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-                fastbill.customer.delete(0, function () {
-                });
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-                fastbill.customer.delete({});
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-
-            try {
-                fastbill.customer.delete([], function () {
-                });
-            } catch (e) {
-                expect(e).to.not.be.undefined;
-            }
-        });
-
-        it('should not respond with an error', function () {
+        it('should not respond with an error', function (done) {
 
             // set up mock response
             nock(fastbill.customer.$uri)

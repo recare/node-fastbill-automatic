@@ -13,7 +13,8 @@
 
 'use strict';
 
-var FastBill = require('../');
+const
+    FastBill = require('../');
 
 describe('The API Wrapper Object', function () {
     

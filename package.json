@@ -4,7 +4,9 @@
   "description": "A nodeJS client wrapper for the node-fastbill-automatic API",
   "readme": "README.md",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "node --harmony ./node_modules/jasmine/bin/jasmine"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:mgreschke/node-fastbill-automatic.git"
@@ -31,10 +33,14 @@
     "gulp-jasmine": "^0.3.0",
     "gulp-jshint": "^1.8.3",
     "gulp-sym": "0.0.13",
+    "jasmine": "^2.3.1",
+    "jasmine-node": "^1.14.5",
     "jshint-stylish": "^0.4.0",
     "nock": "^2.3.0"
   },
   "dependencies": {
+    "bluebird": "^2.9.30",
+    "lodash": "^3.10.0",
     "mandatory": "^1.0.0"
   }
 }
