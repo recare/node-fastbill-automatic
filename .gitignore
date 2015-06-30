@@ -2,5 +2,4 @@ node_modules
 .zedstate
 .idea
 .idea/*
-gulpfile.js
 projectFilesBackup
