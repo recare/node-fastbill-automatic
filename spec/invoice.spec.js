@@ -14,8 +14,12 @@
 'use strict';
 
 
+<<<<<<< HEAD
 const
     FastBill = require('../'),
+=======
+var FastBill = require('../'),
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
     nock = require('nock'),
     expect = require('chai').expect,
     assert = require('chai').assert;
@@ -28,6 +32,7 @@ describe('The FastbillAPIs Invoice Interface', function () {
         apikey: "abc123"
     });
 
+<<<<<<< HEAD
     describe('Invoice.get', function () {
         it('should be defined', function () {
             expect(fastbill.invoice.constructor.prototype.hasOwnProperty('get')).to.equal(true);
@@ -44,12 +49,56 @@ describe('The FastbillAPIs Invoice Interface', function () {
                 })
                 .reply(200, {
                     RESPONSE: {
+=======
+    describe('Invoice.get', function(){
+        it('should be defined', function(){
+            expect(fastbill.invoice.constructor.prototype.hasOwnProperty('get')).to.equal(true);
+        });
+
+        it('should throw errors on invalid arguments', function () {
+
+            try {
+                fastbill.invoice.get();
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.get(0, function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.get({});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.get([], function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+        });
+
+        it('should respond with a list of invoices', function(){
+
+            // set up mock response
+            nock(fastbill.invoice.$uri)
+                .post('', function(body){
+                    return body.service == 'invoice.get';
+                })
+                .reply(200, {
+                    RESPONSE:{
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
                         INVOICES: ['object', 'object', 'object'],
                         ERRORS: null
                     }
                 });
 
             var options = {some: 'object'};
+<<<<<<< HEAD
             var promise = fastbill.invoice.get(options);
 
             promise.then(function (result) {
@@ -70,12 +119,60 @@ describe('The FastbillAPIs Invoice Interface', function () {
 
 
         it('should respond with a fastbill invoice id', function (done) {
+=======
+
+            fastbill.invoice.get(options, function(err, invoices){
+                expect(err).to.equal(null);
+                assert.isArray(invoices, 'Returns a list of invoice objects.');
+            });
+
+        });
+    });
+
+    describe('Invoice.create', function(){
+        it('should be defined', function(){
+            expect(fastbill.invoice.constructor.prototype.hasOwnProperty('create')).to.equal(true);
+        });
+
+        it('should throw errors on invalid arguments', function () {
+
+            try {
+                fastbill.invoice.create();
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.create(0, function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.create({});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.create([], function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+        });
+
+        it('should respond with a fastbill invoice id', function(){
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
 
             // set up mock response
             nock(fastbill.invoice.$uri)
                 .post('')
                 .reply(200, {
+<<<<<<< HEAD
                     RESPONSE: {
+=======
+                    RESPONSE:{
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
                         INVOICE_ID: 1,
                         ERRORS: null
                     },
@@ -86,6 +183,7 @@ describe('The FastbillAPIs Invoice Interface', function () {
                 ITEMS: ['test'],
                 CUSTOMER_ID: 1
             };
+<<<<<<< HEAD
             var promise = fastbill.invoice.create(newInvoice);
 
             promise.then(function (result) {
@@ -96,16 +194,60 @@ describe('The FastbillAPIs Invoice Interface', function () {
                     new Error('Promise should be resolved')
                 );
             });
+=======
+
+            fastbill.invoice.create(newInvoice, function(err, invoiceId){
+                expect(err).to.equal(null);
+                assert.typeOf(invoiceId, 'number', 'Returns a invoice_id.');
+            });
+
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
         });
 
     });
 
+<<<<<<< HEAD
     describe('Invoice.update', function () {
         it('should be defined', function () {
             expect(fastbill.invoice.constructor.prototype.hasOwnProperty('update')).to.equal(true);
         });
 
         it('should not respond with an error', function (done) {
+=======
+    describe('Invoice.update', function(){
+        it('should be defined', function(){
+            expect(fastbill.invoice.constructor.prototype.hasOwnProperty('update')).to.equal(true);
+        });
+
+        it('should throw errors on invalid arguments', function () {
+
+            try {
+                fastbill.invoice.update();
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.update(0, function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.update({});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.update([], function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+        });
+
+        it('should not respond with an error', function(){
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
 
             // set up mock response
             nock(fastbill.invoice.$uri)
@@ -119,6 +261,7 @@ describe('The FastbillAPIs Invoice Interface', function () {
 
             var id = 1,
                 modification = {CURRENCY: 'EUR'};
+<<<<<<< HEAD
             var promise = fastbill.invoice.update(id, modification);
 
             promise.then(function (result) {
@@ -141,17 +284,66 @@ describe('The FastbillAPIs Invoice Interface', function () {
 
 
         it('should not respond with an error', function (done) {
+=======
+
+            fastbill.invoice.update(id, modification, function(err){
+                assert.equal(err, null, 'Error is null.');
+            });
+
+        })
+
+    });
+
+    describe('Invoice.delete', function(){
+        it('should be defined', function(){
+            expect(fastbill.invoice.constructor.prototype.hasOwnProperty('delete')).to.equal(true);
+        });
+
+        it('should throw errors on invalid arguments', function () {
+
+            try {
+                fastbill.invoice.delete();
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.delete(0, function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.delete({});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.delete([], function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+        });
+
+        it('should not respond with an error', function(){
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
 
             // set up mock response
             nock(fastbill.invoice.$uri)
                 .post('')
                 .reply(200, {
+<<<<<<< HEAD
                     RESPONSE: {
+=======
+                    RESPONSE:{
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
                         STATUS: 'success',
                         ERRORS: null
                     }
                 });
 
+<<<<<<< HEAD
             var id = 1;
             var promise = fastbill.invoice.delete(id);
 
@@ -176,17 +368,66 @@ describe('The FastbillAPIs Invoice Interface', function () {
 
 
         it('should not respond with an invoice number', function (done) {
+=======
+            var id= 1;
+
+            fastbill.invoice.delete(id, function(err){
+                assert.equal(err, null, 'Error is null.');
+            });
+
+        });
+    });
+
+    describe('Invoice.complete', function(){
+        it('should be defined', function(){
+            expect(fastbill.invoice.constructor.prototype.hasOwnProperty('complete')).to.equal(true);
+        });
+
+        it('should throw errors on invalid arguments', function () {
+
+            try {
+                fastbill.invoice.complete();
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.complete(0, function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.complete({});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.complete([], function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+        });
+
+        it('should not respond with an invoice number', function(){
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
 
             // set up mock response
             nock(fastbill.invoice.$uri)
                 .post('')
                 .reply(200, {
+<<<<<<< HEAD
                     RESPONSE: {
+=======
+                    RESPONSE:{
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
                         INVOICE_NUMBER: 1,
                         ERRORS: null
                     }
                 });
 
+<<<<<<< HEAD
             var id = 1;
             var promise = fastbill.invoice.complete(id);
 
@@ -197,11 +438,18 @@ describe('The FastbillAPIs Invoice Interface', function () {
                 done(
                     new Error('Promise should be resolved')
                 );
+=======
+            var id= 1;
+
+            fastbill.invoice.complete(id, function(err){
+                assert.equal(err, null, 'Error is null.');
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
             });
 
         });
     });
 
+<<<<<<< HEAD
     describe('Invoice.cancel', function () {
         it('should be defined', function () {
             expect(fastbill.invoice.constructor.prototype.hasOwnProperty('cancel')).to.equal(true);
@@ -209,18 +457,58 @@ describe('The FastbillAPIs Invoice Interface', function () {
 
 
         it('should not respond with an error', function (done) {
+=======
+    describe('Invoice.cancel', function(){
+        it('should be defined', function(){
+            expect(fastbill.invoice.constructor.prototype.hasOwnProperty('cancel')).to.equal(true);
+        });
+
+        it('should throw errors on invalid arguments', function () {
+
+            try {
+                fastbill.invoice.cancel();
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.cancel(0, function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.cancel({});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.cancel([], function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+        });
+
+        it('should not respond with an error', function(){
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
 
             // set up mock response
             nock(fastbill.invoice.$uri)
                 .post('')
                 .reply(200, {
+<<<<<<< HEAD
                     RESPONSE: {
+=======
+                    RESPONSE:{
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
                         INVOICE_NUMBER: 1,
                         ERRORS: null
                     }
 
                 });
 
+<<<<<<< HEAD
             var id = 1;
             var promise = fastbill.invoice.cancel(id);
 
@@ -243,18 +531,67 @@ describe('The FastbillAPIs Invoice Interface', function () {
 
 
         it('should respond with the number of remaining credits on the account', function (done) {
+=======
+            var id= 1;
+
+            fastbill.invoice.cancel(id, function(err){
+                assert.equal(err, null, 'Error is null.');
+            });
+
+        });
+    });
+
+    describe('Invoice.sign', function(){
+        it('should be defined', function(){
+            expect(fastbill.invoice.constructor.prototype.hasOwnProperty('sign')).to.equal(true);
+        });
+
+        it('should throw errors on invalid arguments', function () {
+
+            try {
+                fastbill.invoice.sign();
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.sign(0, function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.sign({});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.sign([], function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+        });
+
+        it('should respond with the number of remaining credits on the account', function(done){
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
 
             // set up mock response
             nock(fastbill.invoice.$uri)
                 .post('')
                 .reply(200, {
+<<<<<<< HEAD
                     RESPONSE: {
+=======
+                    RESPONSE:{
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
                         REMAINING_CREDITS: 10,
                         ERRORS: null
                     }
 
                 });
 
+<<<<<<< HEAD
             var id = 1;
             var promise = fastbill.invoice.sign(id);
 
@@ -277,11 +614,59 @@ describe('The FastbillAPIs Invoice Interface', function () {
 
 
         it('should respond with an invoice number', function (done) {
+=======
+            var id= 1;
+
+            fastbill.invoice.cancel(id, function(err){
+                assert.equal(err, null, 'Error is null.');
+                done();
+            });
+
+        });
+    });
+
+    describe('Invoice.setpaid', function(){
+        it('should be defined', function(done){
+            expect(fastbill.invoice.constructor.prototype.hasOwnProperty('setpaid')).to.equal(true);
+            done();
+        });
+
+        it('should throw errors on invalid arguments', function () {
+
+
+            try {
+                fastbill.invoice.setpaid();
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.setpaid(0, function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.setpaid({});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+
+            try {
+                fastbill.invoice.setpaid([], function () {});
+            } catch (e) {
+                expect(e).to.not.be.undefined;
+            }
+        });
+
+        it('should respond with an invoice number', function(done){
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
 
             // set up mock response
             nock(fastbill.invoice.$uri)
                 .post('')
                 .reply(200, {
+<<<<<<< HEAD
                     RESPONSE: {
                         INVOICE_NUMBER: 1,
                         ERRORS: null
@@ -302,4 +687,23 @@ describe('The FastbillAPIs Invoice Interface', function () {
         });
     });
 
+=======
+                    RESPONSE:{
+                        INVOICE_NUMBER: 1,
+                        ERRORS: null
+                    }
+
+                });
+
+            var id= 1;
+
+            fastbill.invoice.cancel(id, function(err, invoiceNumber){
+                assert.equal(err, null, 'Error is null.');
+                assert.typeOf(invoiceNumber, 'number', 'Responds with an invoice number.')
+                done();
+            });
+
+        });
+    });
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
 });

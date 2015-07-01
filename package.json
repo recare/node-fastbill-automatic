@@ -33,8 +33,11 @@
     "gulp-jasmine": "^0.3.0",
     "gulp-jshint": "^1.8.3",
     "gulp-sym": "0.0.13",
+<<<<<<< HEAD
     "jasmine": "^2.3.1",
     "jasmine-node": "^1.14.5",
+=======
+>>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
     "jshint-stylish": "^0.4.0",
     "nock": "^2.3.0"
   },
