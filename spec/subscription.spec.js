@@ -37,7 +37,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
         it('should respond with a list of subscriptions', function (done) {
 
             // set up mock response
-            nock(fastbill.subscription.$uri)
+            var scope = nock(fastbill.subscription.$uri)
                 .post('')
                 .reply(200, {
                     RESPONSE: {
@@ -45,6 +45,8 @@ describe('The FastbillAPIs Subscription Interface', function () {
                         ERRORS: null
                     }
                 });
+
+            console.log(scope.pendingMocks());
 
             var options = {some: 'object'};
             var promise = fastbill.subscription.get(options);
