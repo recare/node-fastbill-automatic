@@ -1,6 +1,9 @@
 # node-fastbill-automatic
 A complete nodejs client for the fastbill automatic API
 
+Now uses Promises.
+
+
 # quick start
 
     npm install node-fastbill-automatic
@@ -23,10 +26,15 @@ A complete nodejs client for the fastbill automatic API
         CUSTOMER_TYPE: 'consumer',
         FIRST_NAME: 'Max',
         LAST_NAME: 'Michael'
-    }, function(err, data){
-    if (err) throw new Error('Customer creation failed');
+    })
+    .then(function(result){
+        console.log(result);
+        })
+    .catch(function(err){
+        if (err) throw new Error('Customer creation failed');
       // More stuff
     });
+    
 
 
 to-do:
