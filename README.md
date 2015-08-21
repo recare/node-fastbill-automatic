@@ -39,8 +39,4 @@ Now uses Promises.
 
 to-do:
 - more examples
-- more meaningful unit tests
-
-
-inspired by:
-https://www.npmjs.com/package/fastbill
+- more unit tests
