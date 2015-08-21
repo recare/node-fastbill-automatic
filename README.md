@@ -1,38 +1,43 @@
 # node-fastbill-automatic
-A complete nodejs client for the fastbill automatic API
+Complete and tested ES6 client for the fastbill automatic API
 
-Now uses Promises.
-
+- Now uses ES6 (transpiled by babel)
+- Now uses Promises.
 
 # quick start
 
     npm install node-fastbill-automatic
 
+# available methods
+
+The module exposes API functionality for customers, invoices and subscriptions.
+Access through fastbill.customer, fastbill.invoice or fastbill.subscription (like in the example below).
+
 # first example
 
     'use strict';
-    var
-      config = require('./config'),
-      fastbill = require('../index').instantiate(
+    import Fastbill from 'node-fastbill-automatic';
+    
+    const fastbill = Fastbill.instantiate(
         {
-            email: config.fastbillEmail,
-            apikey: config.fastbillApiKey
+            email: 'YOUR_FASTBILL_EMAIL',
+            apikey: 'YOUR_FASTBILL_API_KEY'
         }
     );
+    
     // 1. create a customer
     fastbill.customer.create(
       {
-        CUSTOMER_NUMBER: '1',
+        CUSTOMER_NUMBER: 1,
         CUSTOMER_TYPE: 'consumer',
         FIRST_NAME: 'Max',
         LAST_NAME: 'Michael'
     })
-    .then(function(result){
-        console.log(result);
+    .then(function(customerId){
+        console.log(`The customer's fastbillId is ${customerId}`);
         })
     .catch(function(err){
-        if (err) throw new Error('Customer creation failed');
-      // More stuff
+        throw new Error('Customer creation failed');
     });
     
 
