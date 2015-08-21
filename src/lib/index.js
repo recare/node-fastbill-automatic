@@ -14,11 +14,10 @@
 
 'use strict';
 
-const
-    mandatory = require('mandatory'),
-    Customer = require('./customer'),
-    Invoice = require('./invoice'),
-    Subscription = require('./subscription');
+import {customerFactory} from './customer';
+import {invoiceFactory} from './invoice';
+import {subscriptionFactory} from './subscription';
+import {typeOf} from './utils/type_handler';
 
 /**
  * Creates a FastBill communication object that provides the access to all
@@ -38,13 +37,13 @@ const
  * 
  */
 
-exports.instantiate = function instantiate (credentials) {
+export function instantiate (credentials) {
 
-    mandatory(credentials).is('object', 'Please provide the proper credentials for the FastBill API.');
+    typeOf(credentials).mustBe('object');
 
     return {
-        customer: Customer.instantiate(credentials),
-        invoice: Invoice.instantiate(credentials),
-        subscription: Subscription.instantiate(credentials)
+        customer: customerFactory(credentials),
+        invoice: invoiceFactory(credentials),
+        subscription: subscriptionFactory(credentials)
     };
-};
+}

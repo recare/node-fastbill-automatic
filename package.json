@@ -5,7 +5,8 @@
   "readme": "README.md",
   "main": "index.js",
   "scripts": {
-    "test": "node --harmony ./node_modules/jasmine/bin/jasmine"
+    "test": "node --harmony ./node_modules/jasmine/bin/jasmine",
+    "build": "babel-node ./node_modules/.bin/gulp build"
   },
   "repository": {
     "type": "git",
@@ -30,20 +31,20 @@
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.2",
     "gulp": "^3.8.7",
+    "gulp-babel": "^5.2.1",
     "gulp-jasmine": "^0.3.0",
     "gulp-jshint": "^1.8.3",
     "gulp-sym": "0.0.13",
-<<<<<<< HEAD
     "jasmine": "^2.3.1",
     "jasmine-node": "^1.14.5",
-=======
->>>>>>> 18a14ebeca804a8fc58572bdb9da627d78626dcc
     "jshint-stylish": "^0.4.0",
     "nock": "^2.3.0"
   },
   "dependencies": {
+    "babel": "^5.8.21",
     "bluebird": "^2.9.30",
     "lodash": "^3.10.0",
-    "mandatory": "^1.0.0"
+    "mandatory": "^1.0.0",
+    "run-sequence": "^1.1.2"
   }
 }

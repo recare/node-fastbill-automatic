@@ -13,14 +13,15 @@
 
 'use strict';
 
-var path = require('path');
+import path from 'path';
+import gulp from 'gulp';
+import jasmine from 'gulp-jasmine';
+import jshint from 'gulp-jshint';
+import symlink from 'gulp-sym';
+import sequence from 'run-sequence';
+import babel from 'gulp-babel';
 
-var gulp = require('gulp');
-var jasmine = require('gulp-jasmine');
-var jshint = require('gulp-jshint');
-var symlink = require('gulp-sym');
-var sequence = require('run-sequence');
-var paths = {};
+const paths = {};
 
 paths.specs = [path.join(__dirname, 'tests', '*.spec.js')];
 paths.sources = [path.join(__dirname, '*.js'), path.join(__dirname, 'lib', '**', '*.js')];
@@ -42,4 +43,9 @@ gulp.task('test', function () {
         .pipe(jasmine());
 });
 
+gulp.task('build', function(){
+    return gulp.src('src/**/*.js')
+        .pipe(babel())
+        .pipe(gulp.dest('build'));
+});
 

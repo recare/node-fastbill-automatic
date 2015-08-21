@@ -13,11 +13,11 @@
 
 'use strict';
 
-const http = require('http'),
-    https = require('https'),
-    url = require('url'),
-    Promise = require('bluebird'),
-    Error = require('./errors');
+import http from 'http';
+import https from 'https';
+import url from 'url';
+import bb from 'bluebird'
+import Error from './errors';
 
 /**
  * Comfortable wrapper for performing a HTTP POST request.
@@ -32,10 +32,10 @@ const http = require('http'),
  * 
  */
 
-function post (options) {
+export function post (options) {
     return new Promise(function (resolve, reject) {
-        var params;
-        var request;
+        let params;
+        let request;
 
         options.uri = options.uri || '';
         params = url.parse(options.uri);
@@ -45,7 +45,7 @@ function post (options) {
         request = ('https:' === params.protocol ? https : http).request(
             params,
             function onResponse(response) {
-                var body = '';
+                let body = '';
 
                 response.on('data', function onData(data) {
                     body = body + data.toString();
@@ -72,6 +72,3 @@ function post (options) {
     });
 }
 
-module.exports = {
-    post : post
-};
