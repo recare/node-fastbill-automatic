@@ -1,6 +1,6 @@
 {
   "name": "node-fastbill-automatic",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A nodeJS client wrapper for the node-fastbill-automatic API",
   "main": "index.js",
   "scripts": {
@@ -41,8 +41,7 @@
     "jshint-stylish": "^0.4.0",
     "nock": "^2.3.0",
     "babel": "^5.8.23",
-    "babel-core": "^5.8.25",
-    "gulp-eslint": "^1.0.0"
+    "babel-core": "^5.8.25"
   },
   "dependencies": {
     "isparta": "^3.1.0",
