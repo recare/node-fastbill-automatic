@@ -1,8 +1,6 @@
 # node-fastbill-automatic
-Complete and tested ES6 client for the fastbill automatic API
 
-- Now uses ES6 (transpiled by babel)
-- Now uses Promises.
+Complete and tested ES6 client for the fastbill automatic API
 
 # quick start
 
@@ -40,8 +38,31 @@ Access through fastbill.customer, fastbill.invoice or fastbill.subscription (lik
         throw new Error('Customer creation failed');
     });
     
+# development
 
+1. Download the repository
 
-to-do:
-- more examples
-- more unit tests
+2. Install dependencies
+
+```
+npm install
+```
+
+3. install gulp and babel
+
+```
+npm install gulp -g
+npm install babel -g
+```
+
+4. Run tests
+
+```
+npm run cover
+```
+
+5. Run ESLint
+
+```
+gulp lint
+```
