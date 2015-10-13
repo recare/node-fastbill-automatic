@@ -1,0 +1,36 @@
+machine:
+  node:
+    version:
+      0.12.0
+
+  environment:
+    CIRCLE_ENV: test
+    ENV: test
+    DEBUG: true
+    NODE_ENV: test
+
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init # use submodules
+
+dependencies:
+  pre:
+    - npm install # install npm
+    - npm install -g gulp
+    - npm install -g babel
+    - gulp build
+
+test:
+  override:
+    - npm cover
+    - gulp lint
+
+## Customize deployment commands
+#deployment:
+
+## Custom notifications
+notify:
+  webhooks:
+    # A list of hashes representing hooks. Only the url field is supported.
+    #- url: https://someurl.com/hooks/circle
