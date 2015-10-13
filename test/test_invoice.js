@@ -24,6 +24,11 @@ const assert = chai.assert;
 
 describe('The FastbillAPIs Invoice Interface', function () {
 
+    afterEach( cb => {
+        nock.cleanAll();
+        cb();
+    });
+
     let fastbill = FastBill.instantiate({
         email: "test@test.com",
         apikey: "abc123"

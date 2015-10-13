@@ -19,6 +19,7 @@ import jshint from 'gulp-jshint';
 import symlink from 'gulp-sym';
 import sequence from 'run-sequence';
 import babel from 'gulp-babel';
+import eslint from 'gulp-eslint';
 
 const paths = {};
 
@@ -36,5 +37,20 @@ gulp.task('build', function(){
     return gulp.src('src/**/*.js')
         .pipe(babel())
         .pipe(gulp.dest('build'));
+});
+
+gulp.task('lint', function () {
+    return gulp.src(['src/**/*.js'])
+
+        // eslint() attaches the lint output to the eslint property
+        // of the file object so it can be used by other modules.
+        .pipe(eslint({
+            configfile: '.eslintrc'
+        }))
+
+        // eslint.format() outputs the lint results to the console.
+        // Alternatively use eslint.formatEach() (see Docs).
+        .pipe(eslint.format());
+    //.pipe(eslint.failOnError());
 });
 

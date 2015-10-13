@@ -28,6 +28,11 @@ describe('The FastbillAPIs Customer Interface', function () {
         apikey: "abc123"
     });
 
+    afterEach( cb => {
+        nock.cleanAll();
+        cb();
+    });
+
     describe('Customer.get', function () {
         it('should be defined', function () {
             expect(fastbill.customer.constructor.prototype.hasOwnProperty('get')).to.equal(true);

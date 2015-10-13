@@ -8,7 +8,7 @@ export function typeOf(param) {
             if (typeof param !== type) {
                 throw new FastbillTypeError(`${param} is not of expected type ${type}`);
             } else {
-                return true
+                return true;
             }
         }
     };

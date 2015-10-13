@@ -16,15 +16,13 @@
 import {post} from './utils/http';
 import Error from './utils/errors';
 
-
-
-export class FastbillAPI{
-    constructor(credentials){
+export class FastbillAPI {
+    constructor(credentials) {
         let auth = new Buffer(`${credentials.email}:${credentials.apikey}`)
             .toString('base64');
         this.$uri = 'https://automatic.fastbill.com/api/1.0/api.php';
         this.$headers = {
-            'Authorization': `Basic ${auth}`,
+            Authorization: `Basic ${auth}`,
             'Content-Type': 'application/json'
         };
     }
@@ -38,23 +36,22 @@ export class FastbillAPI{
      */
 
     $request(payload, callback) {
-        var options = {
+        let options = {
             uri: this.$uri,
             headers: this.$headers,
             data: payload && JSON.stringify(payload)
         };
 
         post(options)
-            .then(function(data){
-                console.log(data);
+            .then(function (data) {
                 try {
                     data = JSON.parse(data).RESPONSE;
                 } catch (e) {
                     return callback(
                         new Error.FastbillInvalidRequestError({
-                        message: 'Unable to parse response',
-                        detail: e
-                    }));
+                            message: 'Unable to parse response',
+                            detail: e
+                        }));
                 }
 
                 // Check if the FastBill API responds with errors
@@ -64,13 +61,8 @@ export class FastbillAPI{
                 }
                 callback(null, data);
             })
-            .catch(function(err){
-                console.log(err);
+            .catch(function (err) {
                 return callback(err, null);
             });
-    };
-
+    }
 }
-
-
-

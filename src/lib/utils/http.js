@@ -16,23 +16,23 @@
 import http from 'http';
 import https from 'https';
 import url from 'url';
-import bb from 'bluebird'
+import bb from 'bluebird';
 import Error from './errors';
 
 /**
  * Comfortable wrapper for performing a HTTP POST request.
- * 
+ *
  * Possible options:
- * 
+ *
  *     uri: {string}
  *     headers: {object}
  *     data: {string}
- * 
+ *
  * @param {object} options Possible request options
- * 
+ *
  */
 
-export function post (options) {
+export function post(options) {
     return new Promise(function (resolve, reject) {
         let params;
         let request;
@@ -42,7 +42,7 @@ export function post (options) {
         params.method = 'POST';
         params.headers = options.headers;
 
-        request = ('https:' === params.protocol ? https : http).request(
+        request = (params.protocol === 'https:' ? https : http).request(
             params,
             function onResponse(response) {
                 let body = '';
@@ -59,7 +59,6 @@ export function post (options) {
         );
 
         request.on('error', function onError(err) {
-            console.log(err);
             return reject(
                 new Error.FastbillConnectionError({
                     message: 'Communication error.',
@@ -67,8 +66,8 @@ export function post (options) {
                 })
             );
         });
+
         request.write(options.data || '');
         request.end();
     });
 }
-
