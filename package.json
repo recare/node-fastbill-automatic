@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:mgreschke/node-fastbill-automatic.git"
+    "url": "git@github.com:veyo-care/node-fastbill-automatic.git"
   },
   "keywords": [
     "fastbill",
@@ -23,9 +23,9 @@
   "author": "Maximilian Greschke <maximilian.greschke@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mgreschke/node-fastbill-automatic/issues"
+    "url": "https://github.com/veyo-care/node-fastbill-automatic/issues"
   },
-  "homepage": "https://github.com/mgreschke/node-fastbill-automatic",
+  "homepage": "https://github.com/veyo-care/node-fastbill-automatic",
   "devDependencies": {
     "chai": "^3.3.0",
     "eslint-plugin-react": "^3.5.1",
