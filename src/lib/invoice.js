@@ -102,29 +102,29 @@ class Invoice extends FastbillAPI{
      * Usage example:
      *
      *     var Invoice = {
- *        CUSTOMER_ID: 1,
- *        CUSTOMER_COSTCENTER_ID: 2,
- *        CURRENCY_CODE: 3,
- *        TEMPLATE_ID: 4,
- *        INTROTEXT: "This is an introduction",
- *        INVOICE_TITLE:	"This is an invoice title",
- *        INVOICE_DATE: 	Date.now(),
- *        DELIVERY_DATE:	Date.now(),
- *        CASH_DISCOUNT_PERCENT: 	0,
- *        CASH_DISCOUNT_DAYS: 0,
- *        EU_DELIVERY: 1,
- *        ITEMS: [{
- *        ARTICLE_NUMBER: "DKADN123",
- *        DESCRIPTION: "Fancy sweater", // required
- *        QUANTITY: 2
- *        UNIT_PRICE: 12.5, // required
- *        VAT_PERCENT: 19.0, // required
- *        IS_GROSS: 1
- *        SORT_ORDER:
- *     }];
- *
- *     fastbill.Invoice.create(Invoice).then(...).catch(...)
- *
+     *        CUSTOMER_ID: 1,
+     *        CUSTOMER_COSTCENTER_ID: 2,
+     *        CURRENCY_CODE: 3,
+     *        TEMPLATE_ID: 4,
+     *        INTROTEXT: "This is an introduction",
+     *        INVOICE_TITLE:	"This is an invoice title",
+     *        INVOICE_DATE: 	Date.now(),
+     *        DELIVERY_DATE:	Date.now(),
+     *        CASH_DISCOUNT_PERCENT: 	0,
+     *        CASH_DISCOUNT_DAYS: 0,
+     *        EU_DELIVERY: 1,
+     *        ITEMS: [{
+     *        ARTICLE_NUMBER: "DKADN123",
+     *        DESCRIPTION: "Fancy sweater", // required
+     *        QUANTITY: 2
+     *        UNIT_PRICE: 12.5, // required
+     *        VAT_PERCENT: 19.0, // required
+     *        IS_GROSS: 1
+     *        SORT_ORDER:
+     *     }];
+     *
+     *     fastbill.Invoice.create(Invoice).then(...).catch(...)
+     *
      * @param {object} invoice The Invoice that should be created.
      *
      */

@@ -14,11 +14,12 @@
 'use strict';
 
 
-const
-    FastBill = require('../'),
-    nock = require('nock'),
-    expect = require('chai').expect,
-    assert = require('chai').assert;
+import chai from 'chai';
+import nock from 'nock';
+
+const FastBill = require('../index');
+const expect = chai.expect;
+const assert = chai.assert;
 
 
 describe('The FastbillAPIs Subscription Interface', function () {
@@ -134,9 +135,9 @@ describe('The FastbillAPIs Subscription Interface', function () {
 
     });
 
-    describe('Subscription.delete', function () {
+    describe('Subscription.remove', function () {
         it('should be defined', function () {
-            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('delete')).to.equal(true);
+            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('remove')).to.equal(true);
         });
 
 
@@ -153,7 +154,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
                 });
 
             var id = 1;
-            var promise = fastbill.subscription.delete(id);
+            var promise = fastbill.subscription.remove(id);
             promise.then(function (result) {
                 expect(result).to.equal(true);
                 done();
@@ -166,9 +167,9 @@ describe('The FastbillAPIs Subscription Interface', function () {
         });
     });
 
-    describe('Subscription.set_usage_data', function () {
+    describe('Subscription.setUsageData', function () {
         it('should be defined', function () {
-            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('set_usage_data')).to.equal(true);
+            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('setUsageData')).to.equal(true);
         });
 
 
@@ -186,7 +187,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
 
             var id = 1,
                 usage = {some: 'usage'};
-            var promise = fastbill.subscription.set_usage_data(id, usage);
+            var promise = fastbill.subscription.setUsageData(id, usage);
             promise.then(function (result) {
                 expect(result).to.equal(true);
                 done();
@@ -198,9 +199,9 @@ describe('The FastbillAPIs Subscription Interface', function () {
         });
     });
 
-    describe('Subscription.change_article', function () {
+    describe('Subscription.changeArticle', function () {
         it('should be defined', function () {
-            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('change_article')).to.equal(true);
+            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('changeArticle')).to.equal(true);
         });
 
 
@@ -218,7 +219,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
 
             var id = 1,
                 modification = {some: 'modification'};
-            var promise = fastbill.subscription.change_article(id, modification);
+            var promise = fastbill.subscription.changeArticle(id, modification);
             promise.then(function (result) {
                 expect(result).to.equal(true);
                 done();
@@ -230,9 +231,9 @@ describe('The FastbillAPIs Subscription Interface', function () {
         });
     });
 
-    describe('Subscription.get_usage_data', function () {
+    describe('Subscription.getUsageData', function () {
         it('should be defined', function () {
-            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('get_usage_data')).to.equal(true);
+            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('getUsageData')).to.equal(true);
         });
 
 
@@ -252,7 +253,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
                 });
 
             var id = 1;
-            var promise = fastbill.subscription.get_usage_data(id);
+            var promise = fastbill.subscription.getUsageData(id);
             promise.then(function (result) {
                 assert.typeOf(result, 'object', 'Responds with an object.')
                 done();
@@ -266,7 +267,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
 
     describe('Subscription.delete_usage_data', function () {
         it('should be defined', function () {
-            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('delete_usage_data')).to.equal(true);
+            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('deleteUsageData')).to.equal(true);
         });
 
 
@@ -284,7 +285,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
                 });
 
             var id = 1;
-            var promise = fastbill.subscription.delete_usage_data(id);
+            var promise = fastbill.subscription.deleteUsageData(id);
             promise.then(function (result) {
                 assert.typeOf(result, 'number', 'Responds with a subscription number.')
                 done();
@@ -357,9 +358,9 @@ describe('The FastbillAPIs Subscription Interface', function () {
         });
     });
 
-    describe('Subscription.get_upcoming_amount', function () {
+    describe('Subscription.getUpcomingAmount', function () {
         it('should be defined', function () {
-            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('get_upcoming_amount')).to.equal(true);
+            expect(fastbill.subscription.constructor.prototype.hasOwnProperty('getUpcomingAmount')).to.equal(true);
         });
 
 
@@ -376,7 +377,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
                 });
 
             var filters = {some: 'filters'};
-            var promise = fastbill.subscription.get_upcoming_amount(filters);
+            var promise = fastbill.subscription.getUpcomingAmount(filters);
             promise.then(function (total) {
                 assert.typeOf(total, 'number', 'Responds with total amount due.')
                 done();
@@ -403,7 +404,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
             });
 
             var id = 1;
-            var promise = fastbill.subscription.get_upcoming_amount(id);
+            var promise = fastbill.subscription.renew(id);
             promise.then(function (result) {
                 expect(result).to.equa(true);
                 done();
@@ -438,6 +439,7 @@ describe('The FastbillAPIs Subscription Interface', function () {
                 expect(result).to.equa(true);
                 done();
             }, function (err) {
+                console.log(err);
                 done(
                     new Error('Promise should be resolved')
                 );

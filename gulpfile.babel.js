@@ -15,7 +15,6 @@
 
 import path from 'path';
 import gulp from 'gulp';
-import jasmine from 'gulp-jasmine';
 import jshint from 'gulp-jshint';
 import symlink from 'gulp-sym';
 import sequence from 'run-sequence';
@@ -36,11 +35,6 @@ gulp.task('lint', function () {
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(jshint.reporter('fail'));
-});
-
-gulp.task('test', function () {
-    return gulp.src(paths.specs)
-        .pipe(jasmine());
 });
 
 gulp.task('build', function(){

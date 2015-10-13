@@ -38,7 +38,6 @@ export function customerFactory (credentials) {
  *
  */
 
-    console.log(FastbillAPI);
 class Customer extends FastbillAPI {
     constructor(credentials) {
         super(credentials);

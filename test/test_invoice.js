@@ -14,11 +14,12 @@
 'use strict';
 
 
-const
-    FastBill = require('../'),
-    nock = require('nock'),
-    expect = require('chai').expect,
-    assert = require('chai').assert;
+import chai from 'chai';
+import nock from 'nock';
+
+const FastBill = require('../index');
+const expect = chai.expect;
+const assert = chai.assert;
 
 
 describe('The FastbillAPIs Invoice Interface', function () {
@@ -51,11 +52,12 @@ describe('The FastbillAPIs Invoice Interface', function () {
 
             var options = {some: 'object'};
             var promise = fastbill.invoice.get(options);
-
+            console.log('PROMISE',promise);
             promise.then(function (result) {
                 assert.typeOf(result, 'array', 'Returns a list of objects.');
                 done();
             }, function (err) {
+                console.log(err);
                 done(
                     new Error('Promise should be resolved')
                 );
@@ -134,9 +136,9 @@ describe('The FastbillAPIs Invoice Interface', function () {
     });
 
 
-    describe('Invoice.delete', function () {
+    describe('Invoice.remove', function () {
         it('should be defined', function () {
-            expect(fastbill.invoice.constructor.prototype.hasOwnProperty('delete')).to.equal(true);
+            expect(fastbill.invoice.constructor.prototype.hasOwnProperty('remove')).to.equal(true);
         });
 
 
@@ -153,7 +155,7 @@ describe('The FastbillAPIs Invoice Interface', function () {
                 });
 
             var id = 1;
-            var promise = fastbill.invoice.delete(id);
+            var promise = fastbill.invoice.remove(id);
 
             promise.then(function (result) {
                 expect(result).to.equal(true);
@@ -289,7 +291,7 @@ describe('The FastbillAPIs Invoice Interface', function () {
                 });
 
             var id = 1;
-            var promise = fastbill.invoice.setpaid(id, new Date().now());
+            var promise = fastbill.invoice.setpaid(id, Date.now());
 
             promise.then(function (result) {
                 assert.typeOf(result, 'number', 'Responds with an invoice number.');
