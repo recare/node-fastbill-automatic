@@ -24,7 +24,7 @@ const assert = chai.assert;
 
 describe('The FastbillAPIs Invoice Interface', function () {
 
-    var fastbill = FastBill.instantiate({
+    let fastbill = FastBill.instantiate({
         email: "test@test.com",
         apikey: "abc123"
     });
@@ -33,7 +33,6 @@ describe('The FastbillAPIs Invoice Interface', function () {
         it('should be defined', function () {
             expect(fastbill.invoice.constructor.prototype.hasOwnProperty('get')).to.equal(true);
         });
-
 
 
         it('should respond with a list of invoices', function (done) {
@@ -50,18 +49,15 @@ describe('The FastbillAPIs Invoice Interface', function () {
                     }
                 });
 
-            var options = {some: 'object'};
-            var promise = fastbill.invoice.get(options);
-            console.log('PROMISE',promise);
-            promise.then(function (result) {
-                assert.typeOf(result, 'array', 'Returns a list of objects.');
-                done();
-            }, function (err) {
-                console.log(err);
-                done(
-                    new Error('Promise should be resolved')
-                );
-            });
+            let options = {some: 'object'};
+            fastbill.invoice.get(options)
+                .then(function (result) {
+                    assert.typeOf(result, 'array', 'Returns a list of objects.');
+                    done();
+                })
+                .catch(err => {
+                    done(err);
+                });
         });
     });
 
@@ -84,11 +80,11 @@ describe('The FastbillAPIs Invoice Interface', function () {
                     INVOICE_ID: 1
                 });
 
-            var newInvoice = {
+            let newInvoice = {
                 ITEMS: ['test'],
                 CUSTOMER_ID: 1
             };
-            var promise = fastbill.invoice.create(newInvoice);
+            let promise = fastbill.invoice.create(newInvoice);
 
             promise.then(function (result) {
                 assert.typeOf(result, 'number', 'Returns a invoice_id.');
@@ -119,9 +115,9 @@ describe('The FastbillAPIs Invoice Interface', function () {
                     }
                 });
 
-            var id = 1,
+            let id = 1,
                 modification = {CURRENCY: 'EUR'};
-            var promise = fastbill.invoice.update(id, modification);
+            let promise = fastbill.invoice.update(id, modification);
 
             promise.then(function (result) {
                 expect(result).to.equal(true);
@@ -154,8 +150,8 @@ describe('The FastbillAPIs Invoice Interface', function () {
                     }
                 });
 
-            var id = 1;
-            var promise = fastbill.invoice.remove(id);
+            let id = 1;
+            let promise = fastbill.invoice.remove(id);
 
             promise.then(function (result) {
                 expect(result).to.equal(true);
@@ -176,7 +172,6 @@ describe('The FastbillAPIs Invoice Interface', function () {
         });
 
 
-
         it('should not respond with an invoice number', function (done) {
 
             // set up mock response
@@ -189,17 +184,17 @@ describe('The FastbillAPIs Invoice Interface', function () {
                     }
                 });
 
-            var id = 1;
-            var promise = fastbill.invoice.complete(id);
-
-            promise.then(function (result) {
-                expect(result).to.equal(true);
-                done();
-            }, function (err) {
-                done(
-                    new Error('Promise should be resolved')
-                );
-            });
+            let id = 1;
+            fastbill.invoice.complete(id)
+                .then(result => {
+                    console.log(result);
+                    assert.isNumber(result);
+                    done();
+                })
+                .catch(err => {
+                    console.log(err);
+                    done(err);
+                });
 
         });
     });
@@ -223,8 +218,8 @@ describe('The FastbillAPIs Invoice Interface', function () {
 
                 });
 
-            var id = 1;
-            var promise = fastbill.invoice.cancel(id);
+            let id = 1;
+            let promise = fastbill.invoice.cancel(id);
 
             promise.then(function (result) {
                 expect(result).to.equal(id);
@@ -243,7 +238,6 @@ describe('The FastbillAPIs Invoice Interface', function () {
         });
 
 
-
         it('should respond with the number of remaining credits on the account', function (done) {
 
             // set up mock response
@@ -257,8 +251,8 @@ describe('The FastbillAPIs Invoice Interface', function () {
 
                 });
 
-            var id = 1;
-            var promise = fastbill.invoice.sign(id);
+            let id = 1;
+            let promise = fastbill.invoice.sign(id);
 
             promise.then(function (result) {
                 assert.typeOf(result, 'number', 'Responds with a number of credits.');
@@ -277,7 +271,6 @@ describe('The FastbillAPIs Invoice Interface', function () {
         });
 
 
-
         it('should respond with an invoice number', function (done) {
 
             // set up mock response
@@ -290,8 +283,8 @@ describe('The FastbillAPIs Invoice Interface', function () {
                     }
                 });
 
-            var id = 1;
-            var promise = fastbill.invoice.setpaid(id, Date.now());
+            let id = 1;
+            let promise = fastbill.invoice.setpaid(id, Date.now());
 
             promise.then(function (result) {
                 assert.typeOf(result, 'number', 'Responds with an invoice number.');

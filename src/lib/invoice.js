@@ -63,7 +63,7 @@ class Invoice extends FastbillAPI{
 
     get(options) {
         var vm = this;
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -131,7 +131,7 @@ class Invoice extends FastbillAPI{
 
     create(invoice) {
         var vm = this;
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -181,7 +181,7 @@ class Invoice extends FastbillAPI{
 
     update(id, invoice) {
         var vm = this;
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -223,7 +223,7 @@ class Invoice extends FastbillAPI{
 
     remove(id) {
         var vm = this;
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -266,7 +266,7 @@ class Invoice extends FastbillAPI{
 
     complete(id, callback) {
         var vm = this;
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -283,8 +283,6 @@ class Invoice extends FastbillAPI{
                 callback = id;
                 id = undefined;
             }
-
-            mandatory(id).is('number', 'Invoice::complete - Please provide a proper id of the Invoice that should be deleted');
 
             vm.$request({
                 service: vm.$scope + 'complete',
@@ -311,7 +309,7 @@ class Invoice extends FastbillAPI{
      */
     cancel(id) {
         var vm = this;
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -356,7 +354,7 @@ class Invoice extends FastbillAPI{
 
     sign(id) {
         var vm = this;
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -396,7 +394,7 @@ class Invoice extends FastbillAPI{
 
     setpaid(id, paidDate) {
         var vm = this;
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(

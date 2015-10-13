@@ -21,7 +21,6 @@ const expect = chai.expect;
 const assert = chai.assert;
 
 
-
 describe('The FastbillAPIs Customer Interface', function () {
 
     var fastbill = FastBill.instantiate({
@@ -47,16 +46,16 @@ describe('The FastbillAPIs Customer Interface', function () {
                 });
 
             var options = {};
-            var promise = fastbill.customer.get(options);
-
-            promise.then(function (customers) {
-                assert.isArray(customers, 'Returns a list of customer objects.');
-                done();
-            }, function (err) {
-                done(
-                    new Error('Promise should be resolved')
-                );
-            });
+            fastbill.customer.get(options)
+                .then(customers =>
+                {
+                    console.log(customers);
+                    assert.isArray(customers, 'Returns a list of customer objects.');
+                    done();
+                })
+                .catch(err => {
+                    done(err);
+                });
         });
 
     });
@@ -65,7 +64,6 @@ describe('The FastbillAPIs Customer Interface', function () {
         it('should be defined', function () {
             expect(fastbill.customer.constructor.prototype.hasOwnProperty('create')).to.equal(true);
         });
-
 
 
         it('should respond with a fastbill customer id', function (done) {

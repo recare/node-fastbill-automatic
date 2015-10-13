@@ -25,11 +25,6 @@ const paths = {};
 paths.specs = [path.join(__dirname, 'tests', '*.spec.js')];
 paths.sources = [path.join(__dirname, '*.js'), path.join(__dirname, 'lib', '**', '*.js')];
 
-gulp.task('hook', function () {
-    return gulp.src('.pre-commit')
-        .pipe(symlink('.git/hooks/pre-commit'));
-});
-
 gulp.task('lint', function () {
     return gulp.src(paths.specs.concat(paths.sources))
         .pipe(jshint())
