@@ -29,32 +29,32 @@ class ExtendableError extends Error {
  * Create subclasses of internal Error class to reflect
  */
 
-export class FastbillError extends ExtendableError{
+export class FastbillError extends ExtendableError {
     constructor(message) {
-        super(message)
+        super(message);
     }
 }
 
-export class FastbilValueError extends ExtendableError{
+export class FastbilValueError extends ExtendableError {
     constructor(message) {
-        super(message)
+        super(message);
     }
 }
 
-export class FastbillTypeError extends ExtendableError{
+export class FastbillTypeError extends ExtendableError {
     constructor(message) {
-        super(message)
+        super(message);
     }
 }
 
-export class FastbillConnectionError extends ExtendableError{
+export class FastbillConnectionError extends ExtendableError {
     constructor(message) {
-        super(message)
+        super(message);
     }
 }
 
-export class FastbillInvalidRequestError extends ExtendableError{
+export class FastbillInvalidRequestError extends ExtendableError {
     constructor(message) {
-        super(message)
+        super(message);
     }
 }

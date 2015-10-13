@@ -13,12 +13,12 @@
 
 'use strict';
 
+import chai from 'chai';
+import nock from 'nock';
 
-const
-    FastBill = require('../'),
-    nock = require('nock'),
-    expect = require('chai').expect,
-    assert = require('chai').assert;
+const FastBill = require('../index');
+const expect = chai.expect;
+const assert = chai.assert;
 
 
 describe('The FastbillAPIs Customer Interface', function () {
@@ -26,6 +26,11 @@ describe('The FastbillAPIs Customer Interface', function () {
     var fastbill = FastBill.instantiate({
         email: "test@test.com",
         apikey: "abc123"
+    });
+
+    afterEach( cb => {
+        nock.cleanAll();
+        cb();
     });
 
     describe('Customer.get', function () {
@@ -46,16 +51,16 @@ describe('The FastbillAPIs Customer Interface', function () {
                 });
 
             var options = {};
-            var promise = fastbill.customer.get(options);
-
-            promise.then(function (customers) {
-                assert.isArray(customers, 'Returns a list of customer objects.');
-                done();
-            }, function (err) {
-                done(
-                    new Error('Promise should be resolved')
-                );
-            });
+            fastbill.customer.get(options)
+                .then(customers =>
+                {
+                    console.log(customers);
+                    assert.isArray(customers, 'Returns a list of customer objects.');
+                    done();
+                })
+                .catch(err => {
+                    done(err);
+                });
         });
 
     });
@@ -64,7 +69,6 @@ describe('The FastbillAPIs Customer Interface', function () {
         it('should be defined', function () {
             expect(fastbill.customer.constructor.prototype.hasOwnProperty('create')).to.equal(true);
         });
-
 
 
         it('should respond with a fastbill customer id', function (done) {
@@ -83,7 +87,7 @@ describe('The FastbillAPIs Customer Interface', function () {
                 });
 
             var customer = {some: 'customerdata'};
-            var promise = fastbill.customer.post(customer);
+            var promise = fastbill.customer.create(customer);
 
             promise.then(function (customer) {
                 assert.typeOf(customer, 'number', 'Returns a customer_id.');
@@ -129,9 +133,9 @@ describe('The FastbillAPIs Customer Interface', function () {
         });
     });
 
-    describe('Customer.delete', function () {
+    describe('Customer.remove', function () {
         it('should be defined', function () {
-            expect(fastbill.customer.constructor.prototype.hasOwnProperty('delete')).to.equal(true);
+            expect(fastbill.customer.constructor.prototype.hasOwnProperty('remove')).to.equal(true);
         });
 
 
@@ -149,7 +153,7 @@ describe('The FastbillAPIs Customer Interface', function () {
 
             var id = 1;
 
-            var promise = fastbill.customer.delete(id);
+            var promise = fastbill.customer.remove(id);
             promise.then(function (result) {
                 assert.equal(result, true);
                 done();

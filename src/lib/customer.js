@@ -24,11 +24,6 @@ import {
     FastbillTypeError
     } from './utils/errors';
 
-
-export function customerFactory (credentials) {
-    return new Customer(credentials);
-}
-
 /**
  * __init__
  *
@@ -38,7 +33,6 @@ export function customerFactory (credentials) {
  *
  */
 
-    console.log(FastbillAPI);
 class Customer extends FastbillAPI {
     constructor(credentials) {
         super(credentials);
@@ -65,7 +59,6 @@ class Customer extends FastbillAPI {
      */
 
     get(options) {
-        let vm = this;
         return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
@@ -82,8 +75,8 @@ class Customer extends FastbillAPI {
             options = options || {};
             typeOf(options).mustBe('object');
 
-            vm.$request({
-                service: vm.$scope + 'get',
+            this.$request({
+                service: this.$scope + 'get',
                 filter: options.filter,
                 limit: options.limit,
                 offset: options.offset
@@ -119,7 +112,6 @@ class Customer extends FastbillAPI {
      */
 
     create(customer) {
-        let vm = this;
         return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
@@ -136,8 +128,8 @@ class Customer extends FastbillAPI {
             customer = customer || {};
             typeOf(customer).mustBe('object');
 
-            vm.$request({
-                service: vm.$scope + 'create',
+            this.$request({
+                service: this.$scope + 'create',
                 data: customer
             }, onResult);
         });
@@ -167,7 +159,6 @@ class Customer extends FastbillAPI {
      */
 
     update(id, modification) {
-        let vm = this;
         return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
@@ -186,8 +177,8 @@ class Customer extends FastbillAPI {
 
             modification.CUSTOMER_ID = id;
 
-            vm.$request({
-                service: vm.$scope + 'update',
+            this.$request({
+                service: this.$scope + 'update',
                 data: modification
             }, onResult);
         });
@@ -210,30 +201,32 @@ class Customer extends FastbillAPI {
      */
 
     remove(id) {
-    let vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(true);
             }
-            resolve(true);
-        }
 
-        typeOf(id).mustBe('number');
+            typeOf(id).mustBe('number');
 
-        vm.$request({
-            service: vm.$scope + 'delete',
-            data: {CUSTOMER_ID: id}
-        }, onResult);
-    });
-};
+            this.$request({
+                service: this.$scope + 'delete',
+                data: {CUSTOMER_ID: id}
+            }, onResult);
+        });
+    }
 
+}
 
+export function customerFactory(credentials) {
+    return new Customer(credentials);
 }
 
 

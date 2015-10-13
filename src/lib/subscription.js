@@ -23,11 +23,6 @@ import {
     FastbillTypeError
     } from './utils/errors';
 
-
-export function subscriptionFactory (credentials) {
-    return new Subscription(credentials);
-}
-
 /**
  * __init__
  *
@@ -38,8 +33,8 @@ export function subscriptionFactory (credentials) {
  *
  */
 
-class Subscription extends FastbillAPI{
-    constructor(credentials){
+class Subscription extends FastbillAPI {
+    constructor(credentials) {
         super(credentials);
         this.$scope = 'subscription.';
     }
@@ -70,32 +65,31 @@ class Subscription extends FastbillAPI{
 
 
     get(options) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(resultset.SUBSCRIPTIONS);
             }
-            console.log(resultset);
-            resolve(resultset.SUBSCRIPTIONS);
-        }
 
-        options = options || {};
-        typeOf(options).mustBe('object');
+            options = options || {};
+            typeOf(options).mustBe('object');
 
-        vm.$request({
-            service: vm.$scope + 'get',
-            filter: options.filter,
-            limit: options.limit,
-            offset: options.offset
-        }, onResult);
-    });
-}
+            this.$request({
+                service: this.$scope + 'get',
+                filter: options.filter,
+                limit: options.limit,
+                offset: options.offset
+            }, onResult);
+        });
+    }
 
     /**
      * Subscription#create
@@ -107,7 +101,7 @@ class Subscription extends FastbillAPI{
      *
      * Usage example:
      *
-     *     var subscription = {
+     *     let subscription = {
      *      SUBSCRIPTION_EXT_UID: 'internal_subscription_1',
      *      ARTICLE_NUMBER: 'Service xy',
      *      COUPON: null,
@@ -128,29 +122,29 @@ class Subscription extends FastbillAPI{
      */
 
     create(subscription) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(resultset.SUBSCRIPTION_ID);
             }
-            resolve(resultset.SUBSCRIPTION_ID);
-        }
 
-        subscription = subscription || {};
-        typeOf(subscription).mustBe('object');
+            subscription = subscription || {};
+            typeOf(subscription).mustBe('object');
 
-        vm.$request({
-            service: vm.$scope + 'create',
-            data: subscription
-        }, onResult);
-    });
-};
+            this.$request({
+                service: this.$scope + 'create',
+                data: subscription
+            }, onResult);
+        });
+    }
 
     /**
      * Subscription#update
@@ -162,7 +156,7 @@ class Subscription extends FastbillAPI{
      *
      *  Usage example:
      *
-     *     var modification = {
+     *     let modification = {
      *         NEXT_EVENT: Date.now(),
      *         SUBSCRIPTION_EXT_UID: 'Internal_service_uid01',
      *         STATUS: 'good',
@@ -176,30 +170,30 @@ class Subscription extends FastbillAPI{
      *
      */
     update(id, modification) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(true);
             }
-            resolve(true);
-        }
 
-        typeOf(id).mustBe('number');
-        typeOf(modification).mustBe('object');
-        modification.SUBSCRIPTION_ID = id;
+            typeOf(id).mustBe('number');
+            typeOf(modification).mustBe('object');
+            modification.SUBSCRIPTION_ID = id;
 
-        vm.$request({
-            service: vm.$scope + 'update',
-            data: modification
-        }, onResult);
-    });
-};
+            this.$request({
+                service: this.$scope + 'update',
+                data: modification
+            }, onResult);
+        });
+    }
 
     /**
      * Subscription#setUsageData
@@ -211,7 +205,7 @@ class Subscription extends FastbillAPI{
      *
      * Usage example:
      *
-     *     var usage = {
+     *     let usage = {
      *         ARTICLE_NUMBER: 'someservice',
      *         QUANTITY: 3,
      *         UNIT_PRICE: 10.0,
@@ -230,30 +224,30 @@ class Subscription extends FastbillAPI{
      */
 
     setUsageData(id, usage) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(true);
             }
-            resolve(true);
-        }
 
-        typeOf(id).mustBe('number');
-        typeOf(usage).mustBe('object');
-        usage.SUBSCRIPTION_ID = id;
+            typeOf(id).mustBe('number');
+            typeOf(usage).mustBe('object');
+            usage.SUBSCRIPTION_ID = id;
 
-        vm.$request({
-            service: vm.$scope + 'setusagedata',
-            data: usage
-        }, onResult);
-    });
-}
+            this.$request({
+                service: this.$scope + 'setusagedata',
+                data: usage
+            }, onResult);
+        });
+    }
 
     /**
      * Subscription#changeArticle
@@ -265,7 +259,7 @@ class Subscription extends FastbillAPI{
      *
      * Usage example:
      *
-     *     var modification = {
+     *     let modification = {
      *         ARTICLE_NUMBER: 'ABC001',
      *         TITLE: 'Service X',
      *         UNIT_PRICE: 200.0,
@@ -282,30 +276,30 @@ class Subscription extends FastbillAPI{
      */
 
     changeArticle(id, modification) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(true);
             }
-            resolve(true);
-        }
 
-        typeOf(id).mustBe('number');
-        typeOf(modification).mustBe('object');
-        modification.SUBSCRIPTION_ID = id;
+            typeOf(id).mustBe('number');
+            typeOf(modification).mustBe('object');
+            modification.SUBSCRIPTION_ID = id;
 
-        vm.$request({
-            service: vm.$scope + 'changearticle',
-            data: modification
-        }, onResult);
-    });
-}
+            this.$request({
+                service: this.$scope + 'changearticle',
+                data: modification
+            }, onResult);
+        });
+    }
 
     /**
      * Subscription#getUsageData
@@ -317,7 +311,7 @@ class Subscription extends FastbillAPI{
      *
      * Usage example:
      *
-     *     var start = Date.now()-10,
+     *     let start = Date.now()-10,
      *         end = Date.now(),
      *     };
      *
@@ -331,36 +325,43 @@ class Subscription extends FastbillAPI{
      */
 
     getUsageData(id, start, end) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(resultset);
             }
-            resolve(resultset);
-        }
 
-        typeOf(id).mustBe('number');
-        typeOf(start).mustBe('number');
-        typeOf(end).mustBe('number');
+            typeOf(id).mustBe('number');
 
-        var usage = {};
+            if (start) {
+                typeOf(start).mustBe('number');
+            }
 
-        usage.SUBSCRIPTION_ID = id;
-        usage.START = start;
-        usage.END = end;
+            if (end) {
+                typeOf(end).mustBe('number');
+            }
 
-        vm.$request({
-            service: vm.$scope + 'getusagedata',
-            data: usage
-        }, onResult);
-    });
-}
+
+            let usage = {};
+
+            usage.SUBSCRIPTION_ID = id;
+            usage.START = start;
+            usage.END = end;
+
+            this.$request({
+                service: this.$scope + 'getusagedata',
+                data: usage
+            }, onResult);
+        });
+    }
 
 
     /**
@@ -382,30 +383,30 @@ class Subscription extends FastbillAPI{
      */
 
     deleteUsageData(usage_id) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(true);
             }
-            resolve(true);
-        }
 
-        var usage = {};
-        typeOf(usage_id).mustBe('number');
-        usage.USAGEDATA_ID = usage_id;
+            let usage = {};
+            typeOf(usage_id).mustBe('number');
+            usage.USAGEDATA_ID = usage_id;
 
-        vm.$request({
-            service: vm.$scope + 'deleteusagedata',
-            data: usage
-        }, onResult);
-    });
-}
+            this.$request({
+                service: this.$scope + 'deleteusagedata',
+                data: usage
+            }, onResult);
+        });
+    }
 
 
     /**
@@ -424,28 +425,28 @@ class Subscription extends FastbillAPI{
      *
      */
     remove(id) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(true);
             }
-            resolve(true);
-        }
 
-        typeOf(id).mustBe('number');
+            typeOf(id).mustBe('number');
 
-        vm.$request({
-            service: vm.$scope + 'delete',
-            data: {SUBSCRIPTION_ID: id}
-        }, onResult);
-    });
-}
+            this.$request({
+                service: this.$scope + 'delete',
+                data: {SUBSCRIPTION_ID: id}
+            }, onResult);
+        });
+    }
 
 
     /**
@@ -464,28 +465,28 @@ class Subscription extends FastbillAPI{
      *
      */
     reactivate(id) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(true);
             }
-            resolve(true);
-        }
 
-        typeOf(id).mustBe('number');
+            typeOf(id).mustBe('number');
 
-        vm.$request({
-            service: vm.$scope + 'reactivate',
-            data: {SUBSCRIPTION_ID: id}
-        }, onResult);
-    });
-}
+            this.$request({
+                service: this.$scope + 'reactivate',
+                data: {SUBSCRIPTION_ID: id}
+            }, onResult);
+        });
+    }
 
 
     /**
@@ -506,28 +507,28 @@ class Subscription extends FastbillAPI{
      */
 
     cancel(id) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(resultset.CANCELLATION_DATE);
             }
-            resolve(resultset.CANCELLATION_DATE);
-        }
 
-        typeOf(id).mustBe('number');
+            typeOf(id).mustBe('number');
 
-        vm.$request({
-            service: vm.$scope + 'cancel',
-            data: {SUBSCRIPTION_ID: id}
-        }, onResult);
-    });
-}
+            this.$request({
+                service: this.$scope + 'cancel',
+                data: {SUBSCRIPTION_ID: id}
+            }, onResult);
+        });
+    }
 
     /**
      * Subscription#getUpcomingAmount
@@ -538,7 +539,7 @@ class Subscription extends FastbillAPI{
      *
      * Usage example:
      *
-     *     var filters = {
+     *     let filters = {
      *     ARTICLE_NUMBER: null,
      *     COUPON: null,
      *     COUNTRY_CODE: 'DE',
@@ -550,29 +551,29 @@ class Subscription extends FastbillAPI{
      */
 
     getUpcomingAmount(filters) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(resultset.TOTAL);
             }
-            resolve(resultset.TOTAL);
-        }
 
 
-        typeOf(filters).mustBe('object');
+            typeOf(filters).mustBe('object');
 
-        vm.$request({
-            service: vm.$scope + 'getupcomingamount',
-            data: filters
-        }, onResult);
-    });
-};
+            this.$request({
+                service: this.$scope + 'getupcomingamount',
+                data: filters
+            }, onResult);
+        });
+    }
 
     /**
      * Subscription#renew
@@ -591,28 +592,28 @@ class Subscription extends FastbillAPI{
      */
 
     renew(id) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(true);
             }
-            resolve(true);
-        }
 
-        typeOf(id).mustBe('number');
+            typeOf(id).mustBe('number');
 
-        vm.$request({
-            service: vm.$scope + 'cancel',
-            data: {SUBSCRIPTION_ID: id}
-        }, onResult);
-    });
-}
+            this.$request({
+                service: this.$scope + 'cancel',
+                data: {SUBSCRIPTION_ID: id}
+            }, onResult);
+        });
+    }
 
     /**
      * Subscription#setaddon
@@ -624,7 +625,7 @@ class Subscription extends FastbillAPI{
      *
      * Usage example:
      *
-     *      var addon = {
+     *      let addon = {
      *          ARTICLE_NUMBER: 'someservice',
      *          QUANTITY: 3,
      *          UNIT_PRICE: '10.0',
@@ -639,32 +640,34 @@ class Subscription extends FastbillAPI{
      */
 
     setaddon(id, addon) {
-    var vm = this;
-    return new Promise((resolve, reject) => {
-        function onResult(err, resultset) {
-            if (err) {
-                return reject(
-                    new FastbillInvalidRequestError({
-                        message: 'Invalid Request to Fastbill.',
-                        detail: err
-                    })
-                );
+
+        return new Promise((resolve, reject) => {
+            function onResult(err, resultset) {
+                if (err) {
+                    return reject(
+                        new FastbillInvalidRequestError({
+                            message: 'Invalid Request to Fastbill.',
+                            detail: err
+                        })
+                    );
+                }
+                resolve(true);
             }
-            resolve(true);
-        }
 
-        typeOf(id).mustBe('number');
-        typeOf(addon).mustBe('object');
+            typeOf(id).mustBe('number');
+            typeOf(addon).mustBe('object');
 
-        addon.SUBSCRIPTION_ID = id;
+            addon.SUBSCRIPTION_ID = id;
 
-        vm.$request({
-            service: vm.$scope + 'setaddon',
-            data: addon
-        }, onResult);
-    });
-}
+            this.$request({
+                service: this.$scope + 'setaddon',
+                data: addon
+            }, onResult);
+        });
+    }
 
 }
 
-
+export function subscriptionFactory(credentials) {
+    return new Subscription(credentials);
+}

@@ -1,0 +1,6 @@
+src/scripts/seed/**/*.js
+src/scripts/seed/**/*.js
+test
+test/**/*.js
+
+src/utils/regexp.js

@@ -15,21 +15,16 @@
 
 import path from 'path';
 import gulp from 'gulp';
-import jasmine from 'gulp-jasmine';
 import jshint from 'gulp-jshint';
 import symlink from 'gulp-sym';
 import sequence from 'run-sequence';
 import babel from 'gulp-babel';
+import eslint from 'gulp-eslint';
 
 const paths = {};
 
 paths.specs = [path.join(__dirname, 'tests', '*.spec.js')];
 paths.sources = [path.join(__dirname, '*.js'), path.join(__dirname, 'lib', '**', '*.js')];
-
-gulp.task('hook', function () {
-    return gulp.src('.pre-commit')
-        .pipe(symlink('.git/hooks/pre-commit'));
-});
 
 gulp.task('lint', function () {
     return gulp.src(paths.specs.concat(paths.sources))
@@ -38,14 +33,24 @@ gulp.task('lint', function () {
         .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('test', function () {
-    return gulp.src(paths.specs)
-        .pipe(jasmine());
-});
-
 gulp.task('build', function(){
     return gulp.src('src/**/*.js')
         .pipe(babel())
         .pipe(gulp.dest('build'));
+});
+
+gulp.task('lint', function () {
+    return gulp.src(['src/**/*.js'])
+
+        // eslint() attaches the lint output to the eslint property
+        // of the file object so it can be used by other modules.
+        .pipe(eslint({
+            configfile: '.eslintrc'
+        }))
+
+        // eslint.format() outputs the lint results to the console.
+        // Alternatively use eslint.formatEach() (see Docs).
+        .pipe(eslint.format());
+    //.pipe(eslint.failOnError());
 });
 

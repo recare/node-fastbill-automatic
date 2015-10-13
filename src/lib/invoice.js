@@ -23,10 +23,6 @@ import {
     FastbillTypeError
     } from './utils/errors';
 
-export function invoiceFactory(credentials) {
-    return new Invoice(credentials);
-}
-
 /**
  * The Invoice broker which abstracts from the
  * Invoice services of the FastBill API.
@@ -35,7 +31,7 @@ export function invoiceFactory(credentials) {
  *
  */
 
-class Invoice extends FastbillAPI{
+class Invoice extends FastbillAPI {
     constructor(credentials) {
         super(credentials);
         this.$scope = 'invoice.';
@@ -62,8 +58,7 @@ class Invoice extends FastbillAPI{
      */
 
     get(options) {
-        var vm = this;
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -80,8 +75,8 @@ class Invoice extends FastbillAPI{
 
             typeOf(options).mustBe('object');
 
-            vm.$request({
-                service: vm.$scope + 'get',
+            this.$request({
+                service: this.$scope + 'get',
                 filter: options.filter,
                 limit: options.limit,
                 offset: options.offset
@@ -102,36 +97,36 @@ class Invoice extends FastbillAPI{
      * Usage example:
      *
      *     var Invoice = {
- *        CUSTOMER_ID: 1,
- *        CUSTOMER_COSTCENTER_ID: 2,
- *        CURRENCY_CODE: 3,
- *        TEMPLATE_ID: 4,
- *        INTROTEXT: "This is an introduction",
- *        INVOICE_TITLE:	"This is an invoice title",
- *        INVOICE_DATE: 	Date.now(),
- *        DELIVERY_DATE:	Date.now(),
- *        CASH_DISCOUNT_PERCENT: 	0,
- *        CASH_DISCOUNT_DAYS: 0,
- *        EU_DELIVERY: 1,
- *        ITEMS: [{
- *        ARTICLE_NUMBER: "DKADN123",
- *        DESCRIPTION: "Fancy sweater", // required
- *        QUANTITY: 2
- *        UNIT_PRICE: 12.5, // required
- *        VAT_PERCENT: 19.0, // required
- *        IS_GROSS: 1
- *        SORT_ORDER:
- *     }];
- *
- *     fastbill.Invoice.create(Invoice).then(...).catch(...)
- *
+     *        CUSTOMER_ID: 1,
+     *        CUSTOMER_COSTCENTER_ID: 2,
+     *        CURRENCY_CODE: 3,
+     *        TEMPLATE_ID: 4,
+     *        INTROTEXT: "This is an introduction",
+     *        INVOICE_TITLE:	"This is an invoice title",
+     *        INVOICE_DATE: 	Date.now(),
+     *        DELIVERY_DATE:	Date.now(),
+     *        CASH_DISCOUNT_PERCENT: 	0,
+     *        CASH_DISCOUNT_DAYS: 0,
+     *        EU_DELIVERY: 1,
+     *        ITEMS: [{
+     *        ARTICLE_NUMBER: "DKADN123",
+     *        DESCRIPTION: "Fancy sweater", // required
+     *        QUANTITY: 2
+     *        UNIT_PRICE: 12.5, // required
+     *        VAT_PERCENT: 19.0, // required
+     *        IS_GROSS: 1
+     *        SORT_ORDER:
+     *     }];
+     *
+     *     fastbill.Invoice.create(Invoice).then(...).catch(...)
+     *
      * @param {object} invoice The Invoice that should be created.
      *
      */
 
     create(invoice) {
-        var vm = this;
-        return new Promise((reject, resolve) => {
+
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -151,8 +146,8 @@ class Invoice extends FastbillAPI{
             typeOf(invoice.ITEMS).mustBe('object');
             typeOf(invoice.CUSTOMER_ID).mustBe('number');
 
-            vm.$request({
-                service: vm.$scope + 'create',
+            this.$request({
+                service: this.$scope + 'create',
                 data: invoice
             }, onResult);
         });
@@ -180,8 +175,8 @@ class Invoice extends FastbillAPI{
      */
 
     update(id, invoice) {
-        var vm = this;
-        return new Promise((reject, resolve) => {
+
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -199,8 +194,8 @@ class Invoice extends FastbillAPI{
             typeOf(invoice).mustBe('object');
             invoice.INVOICE_ID = id;
 
-            vm.$request({
-                service: vm.$scope + 'update',
+            this.$request({
+                service: this.$scope + 'update',
                 data: invoice
             }, onResult);
         });
@@ -222,8 +217,8 @@ class Invoice extends FastbillAPI{
      */
 
     remove(id) {
-        var vm = this;
-        return new Promise((reject, resolve) => {
+
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -239,8 +234,8 @@ class Invoice extends FastbillAPI{
 
             typeOf(id).mustBe('number');
 
-            vm.$request({
-                service: vm.$scope + 'delete',
+            this.$request({
+                service: this.$scope + 'delete',
                 data: {INVOICE_ID: id}
             }, onResult);
         });
@@ -265,8 +260,7 @@ class Invoice extends FastbillAPI{
      */
 
     complete(id, callback) {
-        var vm = this;
-        return new Promise((reject, resolve) => {
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -276,18 +270,11 @@ class Invoice extends FastbillAPI{
                         })
                     );
                 }
-                resolve(data.INVOICE_NUMBER);
+                resolve(resultset.INVOICE_NUMBER);
             }
 
-            if ('function' === typeof id) {
-                callback = id;
-                id = undefined;
-            }
-
-            mandatory(id).is('number', 'Invoice::complete - Please provide a proper id of the Invoice that should be deleted');
-
-            vm.$request({
-                service: vm.$scope + 'complete',
+            this.$request({
+                service: this.$scope + 'complete',
                 data: {INVOICE_ID: id}
             }, onResult);
         });
@@ -310,8 +297,8 @@ class Invoice extends FastbillAPI{
      *
      */
     cancel(id) {
-        var vm = this;
-        return new Promise((reject, resolve) => {
+
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -327,8 +314,8 @@ class Invoice extends FastbillAPI{
 
             typeOf(id).mustBe('number');
 
-            vm.$request({
-                service: vm.$scope + 'cancel',
+            this.$request({
+                service: this.$scope + 'cancel',
                 data: {INVOICE_ID: id}
             }, onResult);
         });
@@ -355,8 +342,8 @@ class Invoice extends FastbillAPI{
      */
 
     sign(id) {
-        var vm = this;
-        return new Promise((reject, resolve) => {
+
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -371,8 +358,8 @@ class Invoice extends FastbillAPI{
 
             typeOf(id).mustBe('number');
 
-            vm.$request({
-                service: vm.$scope + 'sign',
+            this.$request({
+                service: this.$scope + 'sign',
                 data: {INVOICE_ID: id}
             }, onResult);
         });
@@ -395,8 +382,8 @@ class Invoice extends FastbillAPI{
      */
 
     setpaid(id, paidDate) {
-        var vm = this;
-        return new Promise((reject, resolve) => {
+
+        return new Promise((resolve, reject) => {
             function onResult(err, resultset) {
                 if (err) {
                     return reject(
@@ -413,8 +400,8 @@ class Invoice extends FastbillAPI{
 
             paidDate = paidDate || null;
 
-            vm.$request({
-                service: vm.$scope + 'setpaid',
+            this.$request({
+                service: this.$scope + 'setpaid',
                 data: {
                     INVOICE_ID: id,
                     PAID_DATE: paidDate
@@ -425,14 +412,6 @@ class Invoice extends FastbillAPI{
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
+export function invoiceFactory(credentials) {
+    return new Invoice(credentials);
+}
