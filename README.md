@@ -1,5 +1,7 @@
 # node-fastbill-automatic
 
+[![Circle CI](https://circleci.com/gh/veyo-care/node-fastbill-automatic/tree/master.svg?style=svg)](https://circleci.com/gh/veyo-care/node-fastbill-automatic/tree/master)
+
 Complete and tested ES6 client for the fastbill automatic API
 
 # quick start
