@@ -23,7 +23,7 @@ dependencies:
 
 test:
   override:
-    - npm cover
+    - npm run cover
     - gulp lint
 
 ## Customize deployment commands
