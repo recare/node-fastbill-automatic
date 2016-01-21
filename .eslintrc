@@ -4,9 +4,6 @@
         "node": true,
         "es6": true
 },
-
-    "plugins": ["react"],
-
     "ecmaFeatures": {
     "arrowFunctions": true,
         "binaryLiterals": true,
@@ -106,7 +103,7 @@
         "no-new-wrappers": 2, // disallows creating new instances of String,Number, and Boolean
         "no-octal": 2, // disallow use of octal literals
         "no-octal-escape": 2, // disallow use of octal escape sequences in string literals, such as var foo = "Copyright \251";
-        "no-param-reassign": 0, // disallow reassignment of function parameters (off by default)
+        "no-param-reassign": 2, // disallow reassignment of function parameters (off by default)
         //"no-process-env": 2, // disallow use of process.env (off by default)
         "no-proto": 2, // disallow usage of __proto__ property
         "no-redeclare": 2, // disallow declaring the same variable more then once
@@ -175,7 +172,7 @@
         "no-new-object": 1, // disallow use of the Object constructor
         "no-spaced-func": 1, // disallow space between function identifier and application
         "no-ternary": 0, // disallow the use of ternary operators (off by default)
-        "no-trailing-spaces": 0, // disallow trailing whitespace at the end of lines
+        "no-trailing-spaces": 1, // disallow trailing whitespace at the end of lines
         //"no-underscore-dangle": 1, // disallow dangling underscores in identifiers
         "one-var": [1, "never"], // allow just one var statement per function (off by default)
         "operator-assignment": [1, "never"], // require assignment operator shorthand where possible or prohibit it entirely (off by default)
@@ -216,25 +213,5 @@
         "max-statements": 0, // specify the maximum number of statement allowed in a function (off by default)
         "no-bitwise": 0, // disallow use of bitwise operators (off by default)
         "no-plusplus": 2, // disallow use of unary operators, ++ and -- (off by default)
-
-        //
-        // eslint-plugin-react
-        //
-        // React specific linting rules for ESLint
-        //
-        "react/display-name": 0, // Prevent missing displayName in a React component definition
-        "react/jsx-quotes": [2, "double", "avoid-escape"], // Enforce quote style for JSX attributes
-        "react/jsx-no-undef": 2, // Disallow undeclared variables in JSX
-        "react/jsx-sort-props": 0, // Enforce props alphabetical sorting
-        "react/jsx-uses-react": 2, // Prevent React to be incorrectly marked as unused
-        "react/jsx-uses-vars": 2, // Prevent variables used in JSX to be incorrectly marked as unused
-        "react/no-did-mount-set-state": 2, // Prevent usage of setState in componentDidMount
-        "react/no-did-update-set-state": 2, // Prevent usage of setState in componentDidUpdate
-        "react/no-multi-comp": 0, // Prevent multiple component definition per file
-        "react/no-unknown-property": 2, // Prevent usage of unknown DOM property
-        "react/prop-types": 2, // Prevent missing props validation in a React component definition
-        "react/react-in-jsx-scope": 2, // Prevent missing React when using JSX
-        "react/self-closing-comp": 2, // Prevent extra closing tags for components without children
-        "react/wrap-multilines": 2, // Prevent missing parentheses around multilines JSX
 }
 }

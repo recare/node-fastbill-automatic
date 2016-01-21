@@ -1,36 +1,15 @@
+## Customize the test machine
 machine:
   node:
     version:
-      0.12.0
-
-  environment:
-    CIRCLE_ENV: test
-    ENV: test
-    DEBUG: true
-    NODE_ENV: test
-
-checkout:
-  post:
-    - git submodule sync
-    - git submodule update --init # use submodules
+      5.1.0
 
 dependencies:
   pre:
-    - npm install # install npm
-    - npm install -g gulp
-    - npm install -g babel
-    - gulp build
+    - npm install
+  post:
+    - npm run build
 
 test:
   override:
-    - npm run cover
-    - gulp lint
-
-## Customize deployment commands
-#deployment:
-
-## Custom notifications
-notify:
-  webhooks:
-    # A list of hashes representing hooks. Only the url field is supported.
-    #- url: https://someurl.com/hooks/circle
+    - npm test

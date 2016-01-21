@@ -16,7 +16,6 @@
 import http from 'http';
 import https from 'https';
 import url from 'url';
-import bb from 'bluebird';
 import Error from './errors';
 
 /**

@@ -1,16 +1,5 @@
 /*
- * fastbill automatic api wrapper for nodejs
- *
- * Copyright(c) 2015 maximilian greschke <maximilian.greschke@gmail.com>
- * MIT Licensed
- *
+ * Entry point for NPM
  */
 
-/**
- * @author Maximilian Greschke <maximilian.greschke@gmail.com>
- *
- */
-
-'use strict';
-
-module.exports = require('./build/lib');
+module.exports = require('./build/lib/index');
